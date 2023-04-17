@@ -1,8 +1,14 @@
+import Footer from "@/components/Footer";
+import Hero from "@/components/Hero";
 import React from "react";
-import useSWR from "swr";
 
 function Home() {
-  return <div>kello</div>;
+  return (
+    <div>
+      <Hero />
+      <Footer />
+    </div>
+  );
 }
 
 export default Home;
