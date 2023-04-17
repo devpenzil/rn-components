@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useStore } from "@/store/store";
 import Link from "next/link";
 import React, { useEffect } from "react";
@@ -7,6 +8,7 @@ function Navbar() {
   useEffect(() => {
     fetchUser();
   }, []);
+  console.log(userdata);
 
   return (
     <div>
@@ -33,6 +35,11 @@ function Navbar() {
             >
               <li>
                 <a>Profile</a>
+              </li>
+              <li>
+                <Link href="/submitcomponents">
+                  <>Submit</>
+                </Link>
               </li>
               <li onClick={logout}>
                 <a>Logout</a>
