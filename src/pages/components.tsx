@@ -1,6 +1,5 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import SearchArea from "@/components/SearchArea";
-import { supabase } from "@/supabase/config";
 import React, { useEffect } from "react";
 
 function components() {
