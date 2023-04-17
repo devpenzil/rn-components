@@ -2,19 +2,59 @@ import ModalEditor from "@/components/ModalEditor";
 import React, { useState } from "react";
 import Image from "next/image";
 import { useStore } from "@/store/store";
+import { component } from "@/types/supabase";
+import { useRouter } from "next/router";
 
 type file = {
   filename: "";
   code: "";
 };
 function Submitcomponents() {
+  const route = useRouter();
   const [openEditor, setOpenEditor] = useState(false);
   const [file, setFile] = useState<file>({
     code: "",
     filename: "",
   });
   const [files, setFiles] = useState([1, 2, 3]);
-  const { uploadToBucket } = useStore();
+  const { uploadToBucket, uploadComponent } = useStore();
+  const submit = () => {
+    const payload: component = {
+      cname: "Custom Buttons with Variants - Horizon UI Tailwind",
+      description:
+        "Simple & modern dashboard custom buttons with variants from Horizon UI Tailwind CSS React",
+      author: {
+        image: "https://avatars.githubusercontent.com/u/67946056?v=4",
+        uid: "78f98b50-8984-4cdc-a3b9-6d4afaa0dad8",
+        username: "devpenzil",
+      },
+      downvotes: 0,
+      files: [
+        {
+          code: `import Layout from "@/components/Layout";
+          import "@/styles/globals.css";
+          import type { AppProps } from "next/app";
+          import { ToastContainer } from "react-toastify";
+          import "react-toastify/dist/ReactToastify.css";
+          
+          export default function App({ Component, pageProps }: AppProps) {
+            return (
+              <Layout>
+                <Component {...pageProps} />
+                <ToastContainer />
+              </Layout>
+            );
+          }
+      `,
+          filename: "index.js",
+        },
+      ],
+      previewurl:
+        "https://images.pexels.com/photos/19677/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=1600",
+      upvotes: 0,
+    };
+    uploadComponent(payload, route.push("/"));
+  };
   return (
     <>
       <div className="container mx-auto py-12">
@@ -73,6 +113,9 @@ function Submitcomponents() {
             );
           })}
         </div>
+        <button className="btn btn-primary mt-8" onClick={submit}>
+          submit
+        </button>
       </div>
       <ModalEditor
         isOpen={openEditor}
