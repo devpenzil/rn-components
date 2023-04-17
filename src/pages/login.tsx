@@ -1,6 +1,11 @@
 import React from "react";
+import { useStore } from "@/store/store";
 
-function login() {
+function Login() {
+  const { userLoggin, logout, fetchUser, userdata } = useStore(
+    (state) => state
+  );
+  console.log({ userdata });
   return (
     <div className="container mx-auto py-40 flex justify-center items-center">
       <div className="card shadow w-1/3 p-8">
@@ -8,15 +13,15 @@ function login() {
         <div className="text-sm font-semibold">
           Enter your email address and we’ll send you a magic log in link.
         </div>
-        <input
-          type="text"
-          placeholder="Type here"
-          className="input w-full mt-6 bg-gray-300"
-        />
-        <button className="btn btn-primary w-min mt-2">Continue</button>
+        <button className="btn btn-primary" onClick={userLoggin}>
+          login with github
+        </button>
+        <button className="btn btn-primary" onClick={fetchUser}>
+          fetch user
+        </button>
       </div>
     </div>
   );
 }
 
-export default login;
+export default Login;

@@ -1,7 +1,13 @@
+import { useStore } from "@/store/store";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect } from "react";
 
 function Navbar() {
+  const { userdata, logout, fetchUser } = useStore();
+  useEffect(() => {
+    fetchUser();
+  }, []);
+
   return (
     <div>
       <div className="navbar border-b-[1px] ">
@@ -12,23 +18,34 @@ function Navbar() {
             </div>
           </Link>
         </div>
-        <div className="flex-none">
-          <button className="btn btn-square btn-ghost">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              className="inline-block w-5 h-5 stroke-current"
+        {userdata?.id !== undefined ? (
+          <div className="dropdown dropdown-end">
+            <label tabIndex={0} className="cursor-pointer">
+              <div className="avatar">
+                <div className="w-12 rounded-full">
+                  <img src={userdata?.user_metadata?.avatar_url} />
+                </div>
+              </div>
+            </label>
+            <ul
+              tabIndex={0}
+              className="dropdown-content menu p-2 shadow bg-white rounded-box w-52"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z"
-              ></path>
-            </svg>
-          </button>
-        </div>
+              <li>
+                <a>Profile</a>
+              </li>
+              <li onClick={logout}>
+                <a>Logout</a>
+              </li>
+            </ul>
+          </div>
+        ) : (
+          <div className="flex-none pr-4">
+            <Link href="/login">
+              <button className="btn">login</button>
+            </Link>
+          </div>
+        )}
       </div>
     </div>
   );
