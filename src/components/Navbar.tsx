@@ -13,9 +13,11 @@ function Navbar() {
   return (
     <div className="bg-transparent w-full">
       <div className="container mx-auto p-3 flex flex-row justify-between items-center">
-        <div className="text-2xl font-semibold">RN Components</div>
+        <Link href="/">
+          <div className="text-2xl font-semibold">RN Components</div>
+        </Link>
         <div>
-          {userdata.id !== undefined ? (
+          {userdata?.id !== undefined ? (
             <div className="flex flex-row gap-5 items-center">
               <Link href="/submitcomponents">
                 <div>Submit Component</div>
@@ -29,7 +31,9 @@ function Navbar() {
               </Link>
             </div>
           ) : (
-            <div className="bg-white">login</div>
+            <div className=" bg-blue-600 px-4 py-2 text-white font-semibold rounded-md">
+              <Link href="/login">login</Link>
+            </div>
           )}
         </div>
       </div>
