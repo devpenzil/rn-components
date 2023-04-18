@@ -11,48 +11,27 @@ function Navbar() {
   console.log(userdata);
 
   return (
-    <div>
-      <div className="navbar border-b-[1px] ">
-        <div className="flex-1">
-          <Link href="/">
-            <div className="btn btn-ghost normal-case text-xl">
-              RN Components
-            </div>
-          </Link>
-        </div>
-        {userdata?.id !== undefined ? (
-          <div className="dropdown dropdown-end">
-            <label tabIndex={0} className="cursor-pointer">
-              <div className="avatar">
-                <div className="w-12 rounded-full">
-                  <img src={userdata?.user_metadata?.avatar_url} />
+    <div className="bg-transparent w-full">
+      <div className="container mx-auto p-3 flex flex-row justify-between items-center">
+        <div className="text-2xl font-semibold">RN Components</div>
+        <div>
+          {userdata.id !== undefined ? (
+            <div className="flex flex-row gap-5 items-center">
+              <Link href="/submitcomponents">
+                <div>Submit Component</div>
+              </Link>
+              <Link href="/profile">
+                <div className="avatar">
+                  <div className="w-12 rounded-full">
+                    <img src={userdata?.user_metadata?.avatar_url} />
+                  </div>
                 </div>
-              </div>
-            </label>
-            <ul
-              tabIndex={0}
-              className="dropdown-content menu p-2 shadow bg-white rounded-box w-52"
-            >
-              <li>
-                <a>Profile</a>
-              </li>
-              <li>
-                <Link href="/submitcomponents">
-                  <>Submit</>
-                </Link>
-              </li>
-              <li onClick={logout}>
-                <a>Logout</a>
-              </li>
-            </ul>
-          </div>
-        ) : (
-          <div className="flex-none pr-4">
-            <Link href="/login">
-              <button className="btn">login</button>
-            </Link>
-          </div>
-        )}
+              </Link>
+            </div>
+          ) : (
+            <div className="bg-white">login</div>
+          )}
+        </div>
       </div>
     </div>
   );

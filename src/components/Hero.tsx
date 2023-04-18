@@ -1,23 +1,22 @@
+import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
 function Hero() {
   return (
-    <div>
-      <div className="hero h-[600px]">
-        <div className="hero-content text-center">
-          <div className="max-w-md">
-            <h1 className="text-5xl font-bold">React Native Components</h1>
-            <p className="py-6">
-              Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-              excepturi exercitationem quasi. In deleniti eaque aut repudiandae
-              et a id nisi.
-            </p>
-            <Link href="/components">
-              <div className="btn btn-accent">view components</div>
-            </Link>
-          </div>
+    <div className="h-[600px] flex flex-col justify-center items-center">
+      <div className="w-1/2 flex flex-col justify-center items-center">
+        <div className="text-4xl font-semibold text-center">
+          A free repository for community components using Tailwind CSS
         </div>
+        <div className=" text-center mt-4 font-semibold text-sm text-slate-700">
+          Open source Tailwind UI components and templates to bootstrap your new
+        </div>
+        <Link href="/components">
+          <div className="mt-6 bg-blue-500 px-6 py-3 rounded-full text-white font-semibold">
+            View components
+          </div>
+        </Link>
       </div>
     </div>
   );

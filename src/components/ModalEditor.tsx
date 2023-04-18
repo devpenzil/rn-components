@@ -1,11 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import Editor from "@monaco-editor/react";
 
 interface Props {
   isOpen: boolean;
   closeEditor: () => void;
+  addfile: (e: any) => void;
 }
-function ModalEditor({ isOpen, closeEditor }: Props) {
+function ModalEditor({ isOpen, closeEditor, addfile }: Props) {
+  const [filename, setfilename] = useState("");
+  const [code, setCode] = useState<string | undefined>("");
+  const submitFile = () => {
+    const payload = {
+      filename: filename,
+      code: code,
+    };
+    addfile(payload);
+    closeEditor();
+  };
   return (
     <>
       {isOpen && (
@@ -17,6 +28,9 @@ function ModalEditor({ isOpen, closeEditor }: Props) {
                   type="text"
                   placeholder="File name"
                   className="input w-full bg-white"
+                  onChange={(e) => {
+                    setfilename(e.target.value);
+                  }}
                 />
               </div>
             </div>
@@ -25,9 +39,14 @@ function ModalEditor({ isOpen, closeEditor }: Props) {
                 height="50vh"
                 defaultLanguage="javascript"
                 defaultValue="// code goes here.."
+                onChange={(e) => {
+                  setCode(e);
+                }}
               />
             </div>
-            <button className="btn btn-primary mt-8">Save</button>
+            <button className="btn btn-primary mt-8" onClick={submitFile}>
+              Save
+            </button>
             <button className="btn btn-ghost mt-8 ml-4" onClick={closeEditor}>
               close
             </button>

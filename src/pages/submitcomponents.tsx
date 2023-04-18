@@ -16,8 +16,9 @@ function Submitcomponents() {
     code: "",
     filename: "",
   });
-  const [files, setFiles] = useState([1, 2, 3]);
+  const [files, setFiles] = useState([]);
   const { uploadToBucket, uploadComponent } = useStore();
+  console.log(files);
   const submit = () => {
     const payload: component = {
       cname: "Custom Buttons with Variants - Horizon UI Tailwind",
@@ -29,31 +30,13 @@ function Submitcomponents() {
         username: "devpenzil",
       },
       downvotes: 0,
-      files: [
-        {
-          code: `import Layout from "@/components/Layout";
-          import "@/styles/globals.css";
-          import type { AppProps } from "next/app";
-          import { ToastContainer } from "react-toastify";
-          import "react-toastify/dist/ReactToastify.css";
-          
-          export default function App({ Component, pageProps }: AppProps) {
-            return (
-              <Layout>
-                <Component {...pageProps} />
-                <ToastContainer />
-              </Layout>
-            );
-          }
-      `,
-          filename: "index.js",
-        },
-      ],
+      files: files,
       previewurl:
         "https://images.pexels.com/photos/19677/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=1600",
       upvotes: 0,
     };
-    uploadComponent(payload, route.push("/"));
+    console.log(payload);
+    // uploadComponent(payload, route.push("/"));
   };
   return (
     <>
@@ -104,7 +87,7 @@ function Submitcomponents() {
                 className="bg-gray-300 p-4 rounded-lg flex justify-between cursor-pointer my-1"
                 key={index}
               >
-                <div>index.tsx</div>
+                <div>{obj.filename}</div>
                 <div className="flex gap-4">
                   <Image src="/icons/trash.svg" alt="" width={24} height={24} />
                   <Image src="/icons/edit.svg" alt="" width={24} height={24} />
@@ -121,6 +104,9 @@ function Submitcomponents() {
         isOpen={openEditor}
         closeEditor={() => {
           setOpenEditor(false);
+        }}
+        addfile={(e) => {
+          setFiles((arr) => [...arr, e]);
         }}
       />
     </>
