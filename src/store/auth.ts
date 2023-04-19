@@ -1,4 +1,5 @@
 import { supabase } from "@/supabase/config";
+import { toast } from "react-toastify";
 
 export const authStore = (set, get) => ({
   userdata: {},
@@ -8,10 +9,12 @@ export const authStore = (set, get) => ({
     });
     get().fetchUser;
   },
-  logout: async () => {
+  logout: async (router) => {
     const { error } = await supabase.auth.signOut();
     if (!error) {
       set({ userdata: {} });
+      toast.success("Logged out");
+      router;
     }
   },
   fetchUser: async () => {
